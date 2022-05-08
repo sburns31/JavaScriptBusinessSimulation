@@ -34,7 +34,7 @@ The simulation can run in a console window or with the provided UI.
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/sburns31/JavaScriptBusinessSimulation
 ```
 
 Open the project in VS Code, or similar IDE, and preview in browser.
