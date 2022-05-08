@@ -10,9 +10,9 @@ The simulation can run in a console window or with the provided UI.
 
 [User Guide](https://github.com/sburns31/JavaScriptBusinessSimulation/blob/main/user_guide.txt)
 
-[Simulation Flow Diagram](https://linktodocumentation)
+[Simulation Flow Diagram](https://github.com/sburns31/JavaScriptBusinessSimulation/blob/main/Code%20Flow%20Diagrams/simulation.js%20flowchart.svg)
 
-[Calculations Flow Diagram](https://linktodocumentation)
+[Calculations Flow Diagram](https://github.com/sburns31/JavaScriptBusinessSimulation/blob/main/Code%20Flow%20Diagrams/calculations.js%20flowchart.svg)
 
 ## Simulation Features
 
