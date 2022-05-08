@@ -8,7 +8,7 @@ The simulation can run in a console window or with the provided UI.
 
 ## User Guides
 
-[User Guide](https://linktodocumentation)
+[User Guide](https://github.com/sburns31/JavaScriptBusinessSimulation/blob/main/user_guide.txt)
 
 [Simulation Flow Diagram](https://linktodocumentation)
 
