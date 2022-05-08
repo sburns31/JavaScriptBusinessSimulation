@@ -1,0 +1,200 @@
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: rgb(234, 242, 245);
+
+}
+
+
+.logo-text {
+    font-family: 'Saira Condensed', sans-serif;
+}
+
+.log {
+    color: rgb(42, 70, 80);
+}
+
+
+.navbar-text {
+    font-size: 30px;
+}
+
+.navbar-custom {
+    background-color: rgb(149, 196, 212);
+    font-size: 20px;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: navy;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: aliceblue;
+}
+
+.dropdown-custom {
+    background-color: rgb(149, 196, 212);
+}
+
+.custom-text {
+    color: aliceblue;
+}
+
+.fa-icon {
+    color: navy;
+}
+
+#input {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+#price-input {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.sidebar-nav {
+    width: 270px;
+    background-color: rgb(149, 196, 212);
+    font-size: 20px;
+}
+
+.sidebar-text {
+    color: navy;
+}
+
+.btn-custom {
+    background-color: rgb(80, 131, 150);
+    color: aliceblue;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#actionbtn {
+    background-color: mediumseagreen;
+    color: aliceblue;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#downloadTXT {
+    background-color: darkslategray;
+    color: aliceblue;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#switchButton {
+    background-color: rgb(42, 42, 42);
+    color: aliceblue;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#runs {
+    margin-left: 20px;
+}
+
+.card-header {
+    background-color: darkslategray;
+    color: aliceblue;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.diff {
+    background-color: rgb(97, 171, 97);
+    color: aliceblue;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.orig {
+    background-color: rgb(139, 169, 180);
+    color: aliceblue;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#cardb {
+    background-color: rgb(250, 251, 252);
+    font-family: 'Roboto Condensed', sans-serif;
+
+}
+
+@media(min-width:992px) {
+    body {
+        overflow: auto !important;
+    }
+
+    .offcanvas-backdrop::before {
+        display: none;
+    }
+
+    main {
+        margin-left: 270px;
+        background-color: rgb(234, 242, 245);
+
+    }
+
+    .sidebar-nav {
+        transform: none;
+        visibility: visible !important;
+        top: 77px;
+
+    }
+}
+
+.card-1 {
+    background-color: rgb(241, 246, 247);
+    font-family: 'Roboto Condensed', sans-serif;
+
+}
+
+.card-2 {
+    background-color: rgb(80, 131, 150);
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+th {
+    color: rgb(80, 131, 150);
+
+}
+
+.cards-wrapper {
+    display: flex;
+    justify-content: center;
+
+}
+
+.card {
+    margin: 0 0.5em;
+    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+    border: none;
+    border-radius: 0;
+
+}
+
+.carousel-inner {
+    padding: 1px;
+    margin: 10px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: mediumseagreen;
+    margin: 20px;
+    width: 5vh;
+    height: 5vh;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#carousel-card-orig {
+    width: 400px;
+    height: 150px;
+
+}
+
+#carousel-card-new {
+    width: 400px;
+    height: 150px;
+}

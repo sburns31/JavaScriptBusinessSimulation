@@ -1,0 +1,47 @@
+*** USER GUIDE : USE WITH SIMULATION AND CALCULATIONS .SVG FLOW DIAGRAMS***
+
+1. Clone the project from GitHub. Save locally and open with IDE (VS Code recommended)
+
+2. View README.md file for project context and general information
+
+3. Go to data.js file, scroll to "AdminManagement" section [lines 904-965]. Update any annual costs to the current year, and change 'billPaid' to true if date has already passed.
+
+4. Go to "Compliance" section [lines 966-976]. Update "companyHouseDueDate" to current year.
+
+5. Go to "Management" section [lines 978-1002]. Update "annualSurveyDate" to current year.
+
+6. Go to "Resources" section [lines 1007-1104]. Update any monthly or annual bill dates to this year.
+
+4. Go to "MarketingCustomerRelations" section [lines 1106-1148]. Update "dateOfRenewal" to the current year.
+
+5. Open the index.html file in the browser (Google Chrome recommended), right click and click 'Inspect' to open browser console.
+
+6. Go to 'Running the Simulation' section, and enter the number of days you want the simulation to run for. Click 'Run Simulation' button.
+
+7. Wait for console and html page to update.
+
+8. Observe updated data within the UI in 'Simulation Value Change Highlights', 'Charting Events Over Time', Employee and Products sections.
+
+9. "Current Date" and "End Date" highlight the dates the simulation has run to and from. 'Run Count' calculates the number of times you run the simulation in one session.
+
+10. The 'Download .txt" button allows you to download the updated data.js simulation data in .txt format. Convert the .txt file to JavaScript to use as further sample data, or use the .txt file for closer analysis of updated variables.
+
+11. Use the carousel buttons to review simulation change highlights for non-financial variables. Original and New states are shown side by side for comparison purposes.
+
+12. Cards in the 'Simulated Financial Changes' section display key financial value changes in regards to banking, profit, loss, sales and tips. The original and new data is shown side by side for comparison purposes, and a 'Differences' card shows the % difference between the two simulated states.
+
+13. 'Charting Events Over Time' shows value changes over the simulated period of time for a sense of the bigger picture. Chart 1 shows the average bank balance over time, chart 2 shows the most popular products and their sales over time, chart 3 compares loss and profitability month on month, and Chart 4 shows the number of customer visits per month.
+
+14. Old Employee and New Employee Data and Old Products and New Products data are shown side by side for comparison purposes, allowing the user to consider and review any changes that may need to be made to increase profitability.
+
+15. Click the 'Try Dark Mode' button to toggle between dark and light mode for users with eye strain or preferring the darker/lighter colour scheme.
+
+16. Use the 'Simulation Actions' section to update values within the simulation data before the simulation runs. These changes can highlight how these actions taken in real life could affect company finances and success, either positively or negatively.
+
+17. When clicking an action button, a modal should pop up displaying original data. Increase a value by entering a floating point number, or decrease a value by using a minus symbol in front of the floating point value. Click the green update button.
+
+19. Updated data will appear in the 'Updated' side of the modal, in tabular form. Click the close button.
+
+20. Enter the new number of days for the simulation to run, and click 'Run Simulation'.
+
+21. Compare new results of simulation with actions taken, compared to original simulation results and original data. Day by day breakdowns available in console window.

@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Model Simulation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Saira+Condensed&display=swap"
+    rel="stylesheet">
+  <link id="theme" rel="stylesheet" href="css/light.css">
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+  <script src="https://kit.fontawesome.com/511d82407d.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+    integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="data.js"></script>
+  <script type="text/javascript" src="simulation.js"></script>
+  <script type="text/javascript" src="calculations.js"></script>
+  <script>
+    //toggle for light/dark mode
+    function darkLightSwitch() {
+
+      var theme = document.getElementById('theme');
+      var switchButton = document.getElementById('switchButton');
+
+      if (theme.getAttribute('href') == 'css/light.css') {
+        theme.setAttribute('href', 'css/dark.css');
+        switchButton.innerHTML = "Try Light Mode <i class='fas fa-sun'></i>";
+      } else {
+        theme.setAttribute('href', 'css/light.css');
+        switchButton.innerHTML = "Try Dark Mode <i class='fas fa-moon'></i>";
+      }
+    }
+  </script>
+
+
+
+
+</head>
+
+<body>
+
+
+  <!-- Top navbar -->
+
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top ">
+    <div class="container-fluid">
+
+      <!-- sidebar trigger-->
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+        aria-controls="offcanvasExample">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- end of sidebar trigger -->
+
+
+      <a class="navbar-brand fw-bold text-uppercase navbar-text logo-text" href="index.html">Business Simulation <i
+          class="fas fa-business-time"></i></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home <i class="fas fa-home"></i></a>
+          </li>
+        </ul>
+        </li>
+        </ul>
+        <form class="d-flex">
+          <div>
+            <button id="switchButton" type="button" class="btn btn-dark" onClick="darkLightSwitch()">Try Dark Mode <i
+                class="fas fa-moon"></i></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- End of navbar -->
+
+  <!-- Main body area-->
+
+
+  <div class="container-fluid p-4">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 fw-bold p-3">
+          <h1 class="text-center logo-text fw-bold text-uppercase log display-3"> Business Simulation Dashboard <span
+              class="me-2"><i class="fas fa-tachometer-alt mr-3 fa-fw"></i></span></h1>
+        </div>
+        <div class="col-md-8 fw-bold offset-md-2 ">
+          <h5 class="text-left logo-text fw-bold log"><em>A calculation-based simulation showing predicted business
+              values
+              and profit success for French Village Bakery. </em> </h5>
+          <h5 class="text-end logo-text fw-bold log"><em>Run the simulation for a select number of days, and apply
+              'actions' to show the potential for effects on profits.</em></h5>
+        </div>
+      </div>
+
+      <div class="container-fluid p-5">
+        <h2 class="text-center logo-text fw-bold text-uppercase log py-2"><u>Simulation Actions</u> <i
+            class="fas fa-calculator fa-fw"></i></h2>
+        <div class="row justify-content-center d-flex justify-content-center p-3">
+          <div class="card">
+            <div id="cardb" class="card-body align-middle">
+              <div class="col col-12 fw-bold text-center">
+                <h4 class=" text-center log logo-text"><em><b><i class="fas fa-tools fa-fw"></i> Complete actions before
+                      running the simulation to update
+                      data values: </b></em></h4>
+                <button id="actionbtn" type="button" class="btn  btn-custom m-3 text-center" data-toggle="modal"
+                  data-target="#exampleModal">Price Change Products <i
+                    class="fas fa-money-bill-wave fa-fw"></i></button>
+                <button id="actionbtn" type="button" class="btn  btn-custom m-3 text-center" data-toggle="modal"
+                  data-target="#vendorModal">Change
+                  Charge to Vendor <i class="fas fa-comment-dollar fa-fw"></i></button>
+                <button id="actionbtn" type="button" class="btn  btn-custom m-3 text-center" data-toggle="modal"
+                  data-target="#staffPayModal">
+                  Change Staff
+                  Salary <i class="fas fa-people-arrows fa-fw"></i></button>
+                <button id="actionbtn" type="button" class="btn  btn-custom m-3 text-center" data-toggle="modal"
+                  data-target="#customerVisitModal">Change Customer Visit Likelihood <i
+                    class="fas fa-store fa-fw"></i></button>
+                <button id="actionbtn" type="button" class="btn  btn-custom m-3 text-center" data-toggle="modal"
+                  data-target="#purchaseModal">Change Purchase Likelihood <i
+                    class="fas fa-shopping-basket fa-fw"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal - Price change-->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Action - Change Prices of Products</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h5 class="card-title text-center log logo-text"><em><b>Input amount each product sale price increases by,
+                    or place a minus before the number to decrease the price:
+              </h5>
+
+              <div class="input-group mb-3 text-center d-flex align-items-center justify-content-center">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">£</span>
+                </div>
+                <input id="price-input" class="input-group-text w-20" type="number" placeholder="0.00 " step="0.10"
+                  min="0" max="100">
+                <div class="input-group-append">
+                  <button id="actionbtn" type="button" class="btn  btn-custom text-center"
+                    onclick="increasePrices(document.getElementById('price-input').value),showAlert();">Update
+                    Prices <i class="fas fa-money-bill-wave"></i></button>
+                </div>
+              </div>
+
+              <div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert"
+                style="display:none;">
+                Success - Product prices updated.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <div class="col-md-12 fw-bold">
+                      <h2 class="text-center logo-text fw-bold text-uppercase log py-2">Original Product Prices</h2>
+                    </div>
+                    <div class="row">
+
+                      <div class="table-responsive">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr class="" bg-info>
+                              <th style="cursor: pointer;" data-column="productName" data-order="desc" scope="col">Name
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="numInStock" data-order="desc" scope="col">Stock
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="price" data-order="desc" scope="col">Price
+                                &#9650
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody id="productsTableOrig">
+                          </tbody>
+                        </table>
+
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="col-md-12 fw-bold">
+                      <h2 class="text-center logo-text fw-bold text-uppercase log py-2">Updated Product Prices</h2>
+                    </div>
+                    <div class="row">
+
+                      <div class="table-responsive">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr class="" bg-info>
+                              <th style="cursor: pointer;" data-column="productName" data-order="desc" scope="col">Name
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="numInStock" data-order="desc" scope="col">Stock
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="price" data-order="desc" scope="col">Price
+                                &#9650
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody id="productsTableNew">
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal - Vendor charge change-->
+      <div class="modal fade" id="vendorModal" tabindex="-1" role="dialog" aria-labelledby="vendorModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="vendorModalLabel">Action - Change Charge to Vendor</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h5 class="card-title text-center log logo-text"><em><b>Input amount for the charge to the Vendor
+                    for selling each product to increase. Place a minus before the number to decrease the price:
+                  </b> </em>
+              </h5>
+
+              <div class="input-group mb-3 text-center d-flex align-items-center justify-content-center">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">£</span>
+                </div>
+                <input id="vendor-input" class="input-group-text w-20" type="number" placeholder="0.00 " step="0.10"
+                  min="0" max="100">
+                <div class="input-group-append">
+                  <button id="actionbtn" type="button" class="btn  btn-custom text-center"
+                    onclick="increaseVendorCharge(document.getElementById('vendor-input').value),showAlertVendor();">Change
+                    Charge <i class="fas fa-comment-dollar"></i></button>
+                </div>
+              </div>
+
+              <div id="myAlertVendor" class="alert alert-success alert-dismissible fade show" role="alert"
+                style="display:none;">
+                Success - Vendor Charges updated.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <div class="col-md-12 fw-bold">
+                      <h2 class="text-center logo-text fw-bold text-uppercase log py-2">Original Vendor Charges</h2>
+                    </div>
+                    <div class="row">
+
+                      <div class="table-responsive">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr class="" bg-info>
+                              <th style="cursor: pointer;" data-column="productName" data-order="desc" scope="col">Name
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="price" data-order="desc" scope="col"> Customer
+                                Price
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="vendorPrice" data-order="desc" scope="col">
+                                Vendor Price
+                                &#9650
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody id="productsVendorTableOrig">
+                          </tbody>
+                        </table>
+
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="col-md-12 fw-bold">
+                      <h2 class="text-center logo-text fw-bold text-uppercase log py-2">Updated Vendor Charge</h2>
+                    </div>
+                    <div class="row">
+
+                      <div class="table-responsive">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr class="" bg-info>
+                              <th style="cursor: pointer;" data-column="productName" data-order="desc" scope="col">Name
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="price" data-order="desc" scope="col"> Customer
+                                Price
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="vendorPrice" data-order="desc" scope="col">
+                                Vendor Price
+                                &#9650
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody id="productsVendorTableNew">
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal - Staff Pay change-->
+      <div class="modal fade" id="staffPayModal" tabindex="-1" role="dialog" aria-labelledby="staffPayLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staffPayLabel">Action - Change salaries of all staff memebers.</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h5 class="card-title text-center log logo-text"><em><b>Input amount each staff salary should increase by,
+                    or place a minus before the number to decrease the price:
+                  </b> </em>
+              </h5>
+
+              <div class="input-group mb-3 text-center d-flex align-items-center justify-content-center">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">£</span>
+                </div>
+                <input id="staffsalary-input" class="input-group-text w-20" type="number" placeholder="0.00 "
+                  step="0.10" min="0" max="100">
+                <div class="input-group-append">
+                  <button id="actionbtn" type="button" class="btn  btn-custom text-center"
+                    onclick="changePay(document.getElementById('staffsalary-input').value),showAlertStaffSalary();">Change
+                    Pay<i class="fas fa-people-arrows fa-fw"></i></button>
+                </div>
+              </div>
+
+              <div id="myAlertStaffSalary" class="alert alert-success alert-dismissible fade show" role="alert"
+                style="display:none;">
+                Success - Staff member salaries have been updated.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <div class="col-md-12 fw-bold">
+                      <h2 class="text-center logo-text fw-bold text-uppercase log py-2">Original Staff Salaries</h2>
+                    </div>
+                    <div class="row">
+
+                      <div class="table-responsive">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr class="" bg-info>
+                              <th style="cursor: pointer;" data-column="employeeName" data-order="desc" scope="col">
+                                Employee Name
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="employeeType" data-order="desc" scope="col">
+                                Status
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="employeeType" data-order="desc" scope="col">
+                                Employee Type
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="vendorPrice" data-order="desc" scope="col">
+                                Salary
+                                &#9650
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody id="employeeTableOrig">
+                          </tbody>
+                        </table>
+
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="col-md-12 fw-bold">
+                      <h2 class="text-center logo-text fw-bold text-uppercase log py-2">Updated Staff Salaries</h2>
+                    </div>
+                    <div class="row">
+
+                      <div class="table-responsive">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr class="" bg-info>
+                              <th style="cursor: pointer;" data-column="employeeName" data-order="desc" scope="col">
+                                Employee Name
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="employeeType" data-order="desc" scope="col">
+                                Status
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="employeeType" data-order="desc" scope="col">
+                                Employee Type
+                                &#9650
+                              </th>
+                              <th style="cursor: pointer;" data-column="vendorPrice" data-order="desc" scope="col">
+                                Salary
+                                &#9650
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody id="employeeTableNew">
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Modal - Customer Likelihood change-->
+      <div class="modal fade" id="customerVisitModal" tabindex="-1" role="dialog" aria-labelledby="customerVisitLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="customerVisitLabel">Action - Change likelihood of a customer visiting.</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h5 class="card-title text-center log logo-text"><em><b>Input value to increase probability of
+                    a customer choosing to visit, or place a minus before the number to decrease probability:
+                  </b> </em>
+              </h5>
+
+              <div class="input-group mb-3 text-center d-flex align-items-center justify-content-center">
+                <input id="customerLikelihood-input" class="input-group-text w-20" type="number" placeholder="0.0"
+                  step="0.10" min="0" max="100">
+                <div class="input-group-append">
+                  <button id="actionbtn" type="button" class="btn  btn-custom text-center"
+                    onclick="updateVisitLikelihood(document.getElementById('customerLikelihood-input').value),showAlertCustomerLikelihood();">Update
+                    <i class="fas fa-store fa-fw"></i></button>
+                </div>
+              </div>
+
+              <div id="myAlertCustomerLikelihood" class="alert alert-success alert-dismissible fade show" role="alert"
+                style="display:none;">
+                Success - Values have been updated.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+
+              <div>
+                <div class="row">
+                  <div class="col-sm-6 mb-3">
+                    <div class="card">
+                      <div class="card-body">
+                        <h2 class="text-center logo-text fw-bold text-uppercase log py-2">Original Values: </h2>
+                        <ul class="list-group list-group-flush">
+                          <li id="likelihoodOfRepeatVisit" class="list-group-item text-center"></li>
+                          <li id="increasedProbOfVisitLoyaltyCard" class="list-group-item text-center"></li>
+                          <li id="increasedProbOfVisitLoyaltyVisit" class="list-group-item text-center"></li>
+                          <li id="increasedProbOfVisitSocialPost" class="list-group-item text-center"></li>
+                          <li id="increasedProbOfVisitPayDay" class="list-group-item text-center"></li>
+                          <li id="increasedProbOfVisitBirthday" class="list-group-item text-center"></li>
+                          <li id="increasedProbOfVisitSpecialDay" class="list-group-item text-center"></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 mb-3">
+                    <div class="card">
+                      <div class="card-body">
+                        <h2 class="text-center logo-text fw-bold text-uppercase log py-2">New Values: </h2>
+                        <ul class="list-group list-group-flush">
+                          <li id="likelihoodOfRepeatVisitNEW" class="list-group-item text-center"></li>
+                          <li id="increasedProbOfVisitLoyaltyCardNEW" class="list-group-item text-center"></li>
+                          <li id="increasedProbOfVisitLoyaltyVisitNEW" class="list-group-item text-center"></li>
+                          <li id="increasedProbOfVisitSocialPostNEW" class="list-group-item text-center"></li>
+                          <li id="increasedProbOfVisitPayDayNEW" class="list-group-item text-center"></li>
+                          <li id="increasedProbOfVisitBirthdayNEW" class="list-group-item text-center"></li>
+                          <li id="increasedProbOfVisitSpecialDayNEW" class="list-group-item text-center"></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal - Purchase change -->
+      <div class="modal fade" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="purchaseLabel">Action - Change likelihood of a customer purchasing a
+                product.</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h5 class="card-title text-center log logo-text"><em><b>Input value to increase the
+                    probability of a customer choosing to visit or place a minus before the number to decrease the
+                    probability:
+                  </b> </em>
+              </h5>
+
+              <div class="input-group mb-3 text-center d-flex align-items-center justify-content-center">
+                <input id="purchaseLikelihood-input" class="input-group-text w-20" type="number" placeholder="0.0"
+                  step="0.10" min="0" max="100">
+                <div class="input-group-append">
+                  <button id="actionbtn" type="button" class="btn  btn-custom text-center"
+                    onclick="updatePurchaseLikelihood(document.getElementById('purchaseLikelihood-input').value),showAlertPurchaseLikelihood();">Update
+                    <i class="fas fa-shopping-basket fa-fw"></i></button>
+                </div>
+              </div>
+
+              <div id="myAlertPurchaseLikelihood" class="alert alert-success alert-dismissible fade show" role="alert"
+                style="display:none;">
+                Success - Values have been updated.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+
+              <div>
+                <div class="row">
+                  <div class="col-sm-6 mb-3">
+                    <div class="card">
+                      <div class="card-body">
+                        <h2 class="text-center logo-text fw-bold text-uppercase log py-2">Original Values: </h2>
+                        <ul class="list-group list-group-flush">
+                          <li id="chanceOfBuyingTheSameThingAsLastTime" class="list-group-item text-center"></li>
+                          <li id="chanceOfBuyingDiscount" class="list-group-item text-center"></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 mb-3">
+                    <div class="card">
+                      <div class="card-body">
+                        <h2 class="text-center logo-text fw-bold text-uppercase log py-2">New Values: </h2>
+                        <ul class="list-group list-group-flush">
+                          <li id="chanceOfBuyingTheSameThingAsLastTimeNEW" class="list-group-item text-center"></li>
+                          <li id="chanceOfBuyingDiscountNEW" class="list-group-item text-center"></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Running the Simulation section -->
+      <div class="container-fluid">
+
+        <div class="row d-flex align-items-center justify-content-center vh-50">
+          <h2 class="text-center logo-text fw-bold text-uppercase log py-2"><u>Running the Simulation</u> <i
+              class="fas fa-globe-europe fa-fw"></i></h2>
+          <div class="col col-3 fw-bold p-3 text-center">
+            <div class="card">
+              <h4 class="card-header text-center  log logo-text">Current Date <i class="fas fa-calendar-alt"></i> </h4>
+              <div id="cardb" class="card-body">
+                <h5 class="card-title">Pre-simulation: </h5>
+                <h5 class="text-center text-danger log logo-text" id="current-date" class="text-center"> Date </h5>
+              </div>
+            </div>
+          </div>
+          <div class="col col-xs-2 fw-bold p-3 text-center align-middle">
+            <div class="card">
+              <div id="cardb" class="card-body align-middle">
+                <h3 class="card-title text-center log logo-text"><em><b>Select number of days for the simulation to run:
+                    </b> </em></h3>
+                <div class="input-group justify-content-center">
+                  <div class="col-xs-4">
+                    <input id="input" class="form-control form-inline" type="number" placeholder="Days ">
+                  </div>
+                  <button id="sim-but" type="button" class="btn  btn-custom "
+                    onclick="startSim(document.getElementById('input').value); clicks();"> Run Simulation <i
+                      class="fas fa-clock"></i></button>
+                  <button id="downloadTXT" type="button" class="btn  btn-custom ">Download .txt <i
+                      class="fas fa-download"></i></button>
+                  <div class="col-xs-5">
+                    <h4 class="text-center text-success log logo-text" id="runs"><b> Run Count: 0 </b></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col col-3 fw-bold p-3 text-center">
+            <div class="card">
+              <h4 class="card-header text-center  log logo-text"> End Date <i class="fas fa-calendar-alt"></i></h4>
+              <div id="cardb" class="card-body">
+                <h5 class="card-title">Post-simulation: </h5>
+                <h5 class="text-center text-success log logo-text" id="post-date"><b> - </b></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- carousel -->
+
+      <div class="row p-4">
+        <h2 class="text-center logo-text fw-bold text-uppercase log p-3"><u>Simulation value change highlights </u> <i
+            class="fas fa-exchange-alt fa-fw"></i></h2>
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="cards-wrapper">
+                <div class="col-md-3 mb-3">
+                  <div class="card text-dark h-100 text-center card-1">
+                    <div class="card-header py-2">
+                      <h4>Original State</h4>
+                    </div>
+                    <div class="card-body py-2">
+                      <h5>Products Made: </h5>
+                    </div>
+                    <div id="totalMadeOrig" class="card-body py-1">
+                      <h1>0</h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card text-light h-100 text-center card-2">
+                    <div class="card-header py-2">
+                      <h4><em>New State: </em></h4>
+                    </div>
+                    <div class="card-body py-2">
+                      <h5><em>Products Made: </em></h5>
+                    </div>
+                    <div id="totalMade" class="card-body py-1">
+                      <h1><em>-</em></h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card text-dark h-100 text-center card-1">
+                    <div class="card-header py-2">
+                      <h4>Original State</h4>
+                    </div>
+                    <div class="card-body py-2">
+                      <h5>Products Sold: </h5>
+                    </div>
+                    <div id="totalSoldOrig" class="card-body py-1">
+                      <h1>0</h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card text-light h-100 text-center card-2">
+                    <div class="card-header py-2">
+                      <h4><em>New State: </em></h4>
+                    </div>
+                    <div class="card-body py-2">
+                      <h5><em>Products Sold: </em></h5>
+                    </div>
+                    <div id="totalSold" class="card-body py-1">
+                      <h1><em>-</em></h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="cards-wrapper">
+                <div class="col-md-3 mb-3">
+                  <div class="card text-dark h-100 text-center card-1">
+                    <div class="card-header py-2">
+                      <h4>Original State</h4>
+                    </div>
+                    <div class="card-body py-2">
+                      <h5>Customer Visits: </h5>
+                    </div>
+                    <div id="custVisitOrig" class="card-body py-1">
+                      <h1>0</h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card text-light h-100 text-center card-2">
+                    <div class="card-header py-2">
+                      <h4><em>New State: </em></h4>
+                    </div>
+                    <div class="card-body py-2">
+                      <h5><em>Customer Visits: </em></h5>
+                    </div>
+                    <div id="custVisit" class="card-body py-1">
+                      <h1><em>-</em></h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card text-dark h-100 text-center card-1">
+                    <div class="card-header py-2">
+                      <h4>Original State</h4>
+                    </div>
+                    <div class="card-body py-2">
+                      <h5>Number of Sales to Vendor: </h5>
+                    </div>
+                    <div id="vendorSalesOrig" class="card-body py-1">
+                      <h1>0</h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card text-light h-100 text-center card-2">
+                    <div class="card-header py-2">
+                      <h4><em>New State: </em></h4>
+                    </div>
+                    <div class="card-body py-2">
+                      <h5><em>Number of Sales to Vendor: </em></h5>
+                    </div>
+                    <div id="vendorSales" class="card-body py-1">
+                      <h1><em>-</em></h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="cards-wrapper">
+                <div class="col-md-3 mb-3">
+                  <div class="card text-dark h-100 text-center card-1">
+                    <div class="card-header py-2">
+                      <h4>Original State</h4>
+                    </div>
+                    <div class="card-body py-2">
+                      <h5>Number of Social Media Posts </h5>
+                    </div>
+                    <div id="socialPostsOrig" class="card-body py-1">
+                      <h1>0</h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card text-light h-100 text-center card-2">
+                    <div class="card-header py-2">
+                      <h4><em>New State: </em></h4>
+                    </div>
+                    <div class="card-body py-2">
+                      <h5><em>Number of Social Media Posts </em></h5>
+                    </div>
+                    <div id="socialPosts" class="card-body py-1">
+                      <h1><em>-</em></h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card text-dark h-100 text-center card-1">
+                    <div class="card-header py-2">
+                      <h4>Original State</h4>
+                    </div>
+                    <div class="card-body py-2">
+                      <h5>Number of Active Employees: </h5>
+                    </div>
+                    <div id="activeEmployeesOrig" class="card-body py-1">
+                      <h1>0</h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card text-light h-100 text-center card-2">
+                    <div class="card-header py-2">
+                      <h4><em>New State: </em></h4>
+                    </div>
+                    <div class="card-body py-2">
+                      <h5><em>Number of Active Employees: </em></h5>
+                    </div>
+                    <div id="activeEmployees" class="card-body py-1">
+                      <h1><em>-</em></h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- end of carousel -->
+
+      <!--Financial changes table -->
+      <div>
+        <div class="row">
+          <h2 class="text-center logo-text fw-bold text-uppercase log py-2"><u>Simulated Financial changes</u> <i
+              class="fas fa-balance-scale-left fa-fw"></i> </h2>
+          <div class="col-sm-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-header orig"><b>Original State:</b> </h5>
+                <ul class="list-group list-group-flush text-center">
+                  <li id="oldBank" class="list-group-item">Bank Balance: &emsp;<b>£0.00</b></li>
+                  <li id="oldProf" class="list-group-item">Annual Profit: &emsp;<b>£0.00</b></li>
+                  <li id="oldLoss" class="list-group-item">Annual Loss: &emsp;<b>£0.00</b></li>
+                  <li id="oldInc" class="list-group-item">Total Product Sale Income: &emsp;<b>£0.00</b></li>
+                  <li id="oldTips" class="list-group-item">Tips: &emsp;<b>£0.00</b></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-header"><b>New State: </b></h5>
+                <ul class="list-group list-group-flush text-center">
+                  <li id="newBank" class="list-group-item">Bank Balance: &emsp;<b>£0.00</b></li>
+                  <li id="newProf" class="list-group-item">Annual Profit: &emsp;<b>£0.00</b></li>
+                  <li id="newLoss" class="list-group-item">Annual Loss: &emsp;<b>£0.00</b></li>
+                  <li id="newInc" class="list-group-item">Total Product Sale Income: &emsp;<b>£0.00</b></li>
+                  <li id="newTips" class="list-group-item">Tips: &emsp;<b>£0.00</b></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-header diff"><b>Difference: </b></h5>
+                <ul class="list-group list-group-flush text-center">
+                  <li id="diffBank" class="list-group-item">Bank Balance: &emsp;<b>-</b></li>
+                  <li id="diffProf" class="list-group-item">Annual Profit: &emsp;<b>-</b></li>
+                  <li id="diffLoss" class="list-group-item">Annual Loss: &emsp;<b>-</b></li>
+                  <li id="diffInc" class="list-group-item">Total Product Sale Income: &emsp;<b>-</b></li>
+                  <li id="diffTips" class="list-group-item">Tips: &emsp;<b>-</b></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <!-- charts-->
+
+    <div class="row p-4">
+      <h2 class="text-center logo-text fw-bold text-uppercase log py-2"><u>Charting events over time </u> <i
+          class="fas fa-chart-bar fa-fw"></i></h2>
+      <div class="col-md-6 mb-3">
+        <div class="card h-100">
+          <div class="card-header">
+            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+            Balance Over Time - Monthly Averages
+          </div>
+          <div class="card-body">
+            <canvas id="myChart" class="chart" width="400" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="card h-100">
+          <div class="card-header">
+            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+            Volume of products sold
+          </div>
+          <div class="card-body">
+            <canvas id="myChart2" class="chart" width="400" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row p-4">
+      <div class="col-md-6 mb-3">
+        <div class="card h-100">
+          <div class="card-header">
+            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+            Profit vs Loss
+          </div>
+          <div class="card-body">
+            <canvas id="myChart3" class="chart" width="400" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="card h-100">
+          <div class="card-header">
+            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+            Customer Visits
+          </div>
+          <div class="card-body">
+            <canvas id="myChart4" class="chart" width="400" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- tables row 1-->
+
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="col-md-12 fw-bold">
+            <h2 class="text-center logo-text fw-bold text-uppercase log py-2">Old Employee Data</h2>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="card card-body">
+                <input id="search-input1" class="form-control" placeholder="Search by employee name, status or type"
+                  type="text">
+              </div>
+
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr class="" bg-info>
+                    <th style="cursor: pointer;" data-column="employeeName" data-order="desc" scope="col">Name
+                      &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="status" data-order="desc" scope="col">Status &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="employeeType" data-order="desc" scope="col">Type
+                      &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="contract" data-order="desc" scope="col">Contract
+                      &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="workingHours" data-order="desc" scope="col">Working
+                      Hours
+                      &#9650</th>
+                    <th style="cursor: pointer;" data-column="leaveTaken" data-order="desc" scope="col">Leave Taken
+                      &#9650</th>
+                    <th style="cursor: pointer;" data-column="sickDays" data-order="desc" scope="col">Sick Days
+                      &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="salary" data-order="desc" scope="col">Salary &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="productivityRating" data-order="desc" scope="col">
+                      Productivity Rating
+                      &#9650</th>
+                  </tr>
+                </thead>
+                <tbody id="empTableOld">
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- another table-->
+        <div class="col-md-6 mb-3">
+          <div class="col-md-12 fw-bold">
+            <h2 class="text-center logo-text fw-bold text-uppercase log py-2">New Employee Data</h2>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="card card-body">
+                <input id="search-input2" class="form-control" placeholder="Search by employee name, status or type"
+                  type="text">
+              </div>
+
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr class="" bg-info>
+                    <th style="cursor: pointer;" data-column="employeeName" data-order="desc" scope="col">Name
+                      &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="status" data-order="desc" scope="col">Status &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="employeeType" data-order="desc" scope="col">Type
+                      &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="contract" data-order="desc" scope="col">Contract
+                      &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="workingHours" data-order="desc" scope="col">Working
+                      Hours
+                      &#9650</th>
+                    <th style="cursor: pointer;" data-column="leaveTaken" data-order="desc" scope="col">Leave Taken
+                      &#9650</th>
+                    <th style="cursor: pointer;" data-column="sickDays" data-order="desc" scope="col">Sick Days
+                      &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="salary" data-order="desc" scope="col">Salary &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="productivityRating" data-order="desc" scope="col">
+                      Productivity Rating
+                      &#9650</th>
+                  </tr>
+                </thead>
+                <tbody id="empTableNew">
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- end of another table-->
+
+      </div>
+
+    </div>
+    <!-- End of row 1-->
+
+    <!-- tables row 2-->
+
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="col-md-12 fw-bold">
+            <h2 class="text-center logo-text fw-bold text-uppercase log py-2">Old Products Data</h2>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="card card-body">
+                <input id="search-input3" class="form-control" placeholder="Search by product name" type="text">
+              </div>
+
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr class="" bg-info>
+                    <th style="cursor: pointer;" data-column="productName" data-order="desc" scope="col">Name &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="numInStock" data-order="desc" scope="col">Stock &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="discount" data-order="desc" scope="col">Discount
+                      &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="volumeMadePerYear" data-order="desc" scope="col">Vol
+                      Made
+                      &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="volumeSoldPerYear" data-order="desc" scope="col">Vol
+                      Sold
+                      &#9650</th>
+                    <th style="cursor: pointer;" data-column="totalSale" data-order="desc" scope="col">Total Sale
+                      &#9650</th>
+                  </tr>
+                </thead>
+                <tbody id="prodTableOld">
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- another table-->
+        <div class="col-md-6 mb-3">
+          <div class="col-md-12 fw-bold">
+            <h2 class="text-center logo-text fw-bold text-uppercase log py-2">New Products Data</h2>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="card card-body">
+                <input id="search-input4" class="form-control" placeholder="Search by product name" type="text">
+              </div>
+
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr class="" bg-info>
+                    <th style="cursor: pointer;" data-column="productName" data-order="desc" scope="col">Name
+                      &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="numInStock" data-order="desc" scope="col">Stock &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="discount" data-order="desc" scope="col">Discount
+                      &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="volumeMadePerYear" data-order="desc" scope="col">Vol Made
+                      &#9650
+                    </th>
+                    <th style="cursor: pointer;" data-column="volumeSoldPerYear" data-order="desc" scope="col">Vol Sold
+                      &#9650</th>
+                    <th style="cursor: pointer;" data-column="totalSale" data-order="desc" scope="col">Total Sale
+                      &#9650</th>
+                  </tr>
+                </thead>
+                <tbody id="prodTableNew">
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- end of another table-->
+
+      </div>
+
+    </div>
+  </div>
+  <!-- End of row 2-->
+
+
+
+  </div>
+
+  </div>
+
+
+
+  <!-- end of main body area-->
+
+  <script>
+
+    var click = 0;
+
+    function clicks() {
+      click += 1;
+      document.getElementById("runs").innerHTML = '<b>Run Count: ' + click;
+    };
+
+    //action products table - original
+    var products = data.company.Products;
+
+    buildTableProducts(data.company.Products);
+
+    function buildTableProducts(datasource) {
+      var table = document.getElementById('productsTableOrig');
+
+      table.innerHTML = ''
+
+      for (var i = 0; i < datasource.length; i++) {
+        var prod = datasource[i];
+        var row = `<tr>
+                    <td>${datasource[i].productName}</td>
+                    <td>${datasource[i].numInStock}</td>
+                    <td>£${datasource[i].productSalePrice.toFixed(2)}</td>
+                </tr>`
+        table.innerHTML += row
+      }
+
+    }
+
+    //action vendor table - original
+    buildTableProductsVendor(data.company.Products);
+
+    function buildTableProductsVendor(datasource) {
+      var table = document.getElementById('productsVendorTableOrig');
+
+      table.innerHTML = ''
+
+      for (var i = 0; i < datasource.length; i++) {
+        var prod = datasource[i];
+        var row = `<tr>
+                    <td>${datasource[i].productName}</td>
+                    <td>£${datasource[i].productSalePrice.toFixed(2)}</td>
+                    <td>£${datasource[i].vendorPrice.toFixed(2)}</td>
+                </tr>`
+        table.innerHTML += row
+      }
+
+    }
+
+    //action employees table - original
+    buildTableEmployees(data.company.Employees);
+
+    function buildTableEmployees(datasource) {
+      var table = document.getElementById('employeeTableOrig');
+
+      table.innerHTML = ''
+
+      for (var i = 0; i < datasource.length; i++) {
+        var emp = datasource[i];
+        var row = `<tr>
+                    <td>${datasource[i].employeeName}</td>
+                    <td>${datasource[i].status}</td>
+                    <td>${datasource[i].employeeType}</td>
+                    <td>£${datasource[i].salary}</td>
+                </tr>`
+        table.innerHTML += row
+      }
+
+    }
+
+
+    //action - customer likelihood
+    document.getElementById('likelihoodOfRepeatVisit').innerHTML = "Likelihood of a customer visiting again: <b>" + likelihoodOfRepeatVisit;
+    document.getElementById('increasedProbOfVisitLoyaltyCard').innerHTML = "Likelihood based on customer having a loyalty card: <b>" + increasedProbOfVisitLoyaltyCard;
+    document.getElementById('increasedProbOfVisitLoyaltyVisit').innerHTML = "Likelihood based on high number of Loyalty visits: <b>" + increasedProbOfVisitLoyaltyVisit;
+    document.getElementById('increasedProbOfVisitSocialPost').innerHTML = "Likelihood of a visit after seeing a social media post <b>" + increasedProbOfVisitSocialPost;
+    document.getElementById('increasedProbOfVisitPayDay').innerHTML = "Likelihood of a visit after being paid: <b>" + increasedProbOfVisitPayDay;
+    document.getElementById('increasedProbOfVisitBirthday').innerHTML = "Likelihood of a visit on their birthday <b>" + increasedProbOfVisitBirthday;
+    document.getElementById('increasedProbOfVisitSpecialDay').innerHTML = "Likelihood of a visit on a holiday <b>" + increasedProbOfVisitSpecialDay;
+
+    //action - purchase likelihood
+    document.getElementById('chanceOfBuyingTheSameThingAsLastTime').innerHTML = "Likelihood of buying the same product as they have before: <b>" + chanceOfBuyingTheSameThingAsLastTime;
+    document.getElementById('chanceOfBuyingDiscount').innerHTML = "Likelihood of buying a product because it's on sale: <b>" + chanceOfBuyingDiscount;
+
+    //alerts for actions
+
+    function showAlert() {
+      $("#myAlert").css("display", "");
+    }
+
+    function showAlertVendor() {
+      $("#myAlertVendor").css("display", "");
+    }
+
+    function showAlertStaffSalary() {
+      $("#myAlertStaffSalary").css("display", "");
+    }
+
+    function showAlertCustomerLikelihood() {
+      $("#myAlertCustomerLikelihood").css("display", "");
+    }
+
+    function showAlertPurchaseLikelihood() {
+      $("#myAlertPurchaseLikelihood").css("display", "");
+    }
+
+  </script>
+
+
+  <script>
+
+    //creation of searchable Bootstrap data tables.
+
+    var ds = data.company.Employees;
+    var pr = data.company.Products;
+
+
+    $('#search-input1').on('keyup', function () {
+      var value = $(this).val()
+      console.log('Value: ', value);
+      var data = searchTable(value, ds);
+      buildTable(data);
+    })
+
+    $('#search-input3').on('keyup', function () {
+      var value = $(this).val()
+      console.log('Value: ', value);
+      //var data = searchTable(value, ds);
+      var datapr = searchTablePr(value, pr);
+      //buildTable(data);
+      buildTablePr(datapr);
+    })
+
+    buildTable(data.company.Employees);
+    buildTablePr(data.company.Products);
+
+    function searchTable(value, data) {
+      var filterData = [];
+      for (var i = 0; i < data.length; i++) {
+        value = value.toLowerCase()
+        var name = data[i].employeeName.toLowerCase();
+        var status = data[i].status.toLowerCase();
+        var type = data[i].employeeType.toLowerCase();
+
+        if (name.includes(value)) {
+          filterData.push(data[i]);
+        } else if (status.includes(value)) {
+          filterData.push(data[i]);
+        } else if (type.includes(value)) {
+          filterData.push(data[i]);
+        }
+      }
+
+
+      return filterData;
+    }
+
+    function searchTablePr(value, data) {
+      var filterData = [];
+      for (var i = 0; i < data.length; i++) {
+        value = value.toLowerCase()
+        var name = data[i].productName.toLowerCase();
+
+        if (name.includes(value)) {
+          filterData.push(data[i]);
+        }
+      }
+
+
+      return filterData;
+    }
+
+    function buildTable(datasource) {
+      var table = document.getElementById('empTableOld');
+
+      table.innerHTML = ''
+
+      for (var i = 0; i < datasource.length; i++) {
+        var emp = datasource[i];
+        var row = `<tr>
+                    <td>${datasource[i].employeeName}</td>
+                    <td>${datasource[i].status}</td>
+                    <td>${datasource[i].employeeType}</td>
+                    <td>${datasource[i].contract}</td>
+                    <td>${datasource[i].workingHours}</td>
+                    <td>${datasource[i].leaveTaken}</td>
+                    <td>${datasource[i].sickDays}</td>
+                    <td>£${datasource[i].salary}</td>
+                    <td>${datasource[i].productivityRating}</td>
+                </tr>`
+        table.innerHTML += row
+      }
+
+    }
+
+    function buildTablePr(datasource) {
+      var table = document.getElementById('prodTableOld');
+
+      table.innerHTML = ''
+
+      for (var i = 0; i < datasource.length; i++) {
+        var prod = datasource[i];
+        var row = `<tr>
+                    <td>${datasource[i].productName}</td>
+                    <td>${datasource[i].numInStock}</td>
+                    <td>£${datasource[i].discount.toFixed(2)}</td>
+                    <td>${datasource[i].volumeMadePerYear}</td>
+                    <td>${datasource[i].volumeSoldPerYear}</td>
+                    <td>£${datasource[i].totalSale.toFixed(2)}</td>
+                </tr>`
+        table.innerHTML += row
+      }
+
+    }
+
+
+  </script>
+
+  <script>
+    //getting current date pre-simulation for html element
+    document.getElementById('current-date').innerHTML = "<b>" + data.date.toLocaleDateString('en-GB') + "</b>";
+
+    //working out differences for difference financial card
+    var origBalance = data.company.Finances.bankBalance;
+    var origProfit = data.company.Finances.Turnover.annualProfit;
+    var origLoss = data.company.Finances.Turnover.annualLoss;
+    var origIncome = data.company.Finances.Banking.Ingoing.totalProductSaleIncome;
+    var origTips = data.company.Finances.Banking.Ingoing.totalTips;
+
+    var current = data.company.Finances.bankBalance;
+
+    //updating original values pre-simulation for carousel
+    document.getElementById('oldBank').innerHTML = "Bank Balance: &emsp;<b>£" + data.company.Finances.bankBalance.toLocaleString('en-UK');
+    document.getElementById('oldProf').innerHTML = "Profit: &emsp;&emsp;<b>£" + data.company.Finances.Turnover.annualProfit.toLocaleString('en-UK');
+    document.getElementById('oldLoss').innerHTML = "Loss: &emsp;&emsp;<b>£" + data.company.Finances.Turnover.annualLoss.toLocaleString('en-UK');
+    document.getElementById('oldInc').innerHTML = "Product Sales: &emsp;&emsp;<b>£" + data.company.Finances.Banking.Ingoing.totalProductSaleIncome.toLocaleString('en-UK');
+    document.getElementById('oldTips').innerHTML = "Tips: &emsp;&emsp;<b>£" + data.company.Finances.Banking.Ingoing.totalTips.toLocaleString('en-UK');
+
+    var totalProductsMadeOrig = 0;
+    var totalProductsSoldOrig = 0;
+
+    for (let a in data.company.Products) {
+
+      let p = data.company.Products[a];
+      totalProductsMadeOrig += p.volumeMadePerYear;
+      totalProductsSoldOrig += p.volumeSoldPerYear;
+    }
+
+    document.getElementById('totalMadeOrig').innerHTML = "<h2><b>" + totalProductsMadeOrig.toLocaleString('en-UK') + "</b></h2>";
+    document.getElementById('totalSoldOrig').innerHTML = "<h2><b>" + totalProductsSoldOrig.toLocaleString('en-UK') + "</b></h2>";
+    document.getElementById('custVisitOrig').innerHTML = "<h2><b>" + data.company.customersVisit.toLocaleString('en-UK') + "</b></h2>";
+    document.getElementById('vendorSalesOrig').innerHTML = "<h2><b>" + data.company.vendorSales.toLocaleString('en-UK') + "</b></h2>";
+    document.getElementById('socialPostsOrig').innerHTML = "<h2><b>" + data.company.socialPosts.toLocaleString('en-UK') + "</b></h2>";
+
+    var acEmps = 0;
+    for (let b in data.company.Employees) {
+
+      let e = data.company.Employees[b];
+      if (e.status == "Active") {
+        acEmps += 1;
+      }
+    }
+
+    document.getElementById('activeEmployeesOrig').innerHTML = "<h2><b>" + acEmps.toLocaleString('en-UK') + "</b></h2>";
+
+  </script>
+
+  <script>
+    //downloading txt function
+    document.getElementById('downloadTXT').onclick = function () {
+      var jsonData = data;
+      console.log(jsonData);
+      var a = document.createElement('a');
+      var blob = new Blob([JSON.stringify(jsonData, null, "\t")], { 'type': 'text/plain' });
+      a.href = window.URL.createObjectURL(blob);
+      a.download = 'sim-data.txt';
+      a.click();
+    };
+
+
+  </script>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+
+
+</body>
+
+</html>
